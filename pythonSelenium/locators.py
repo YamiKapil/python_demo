@@ -17,5 +17,7 @@ driver.find_element(by=By.ID, value="exampleCheck1").click()
 # find element by xPath
 driver.find_element(by=By.XPATH, value="//input[@type='submit']").click()
 
-
+# grabbing the text..
+successText = driver.find_element(by=By.CLASS_NAME, value="alert-success").text
+print(successText)
 

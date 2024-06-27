@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 
 driver = webdriver.Chrome()
 
@@ -17,26 +18,40 @@ driver.find_element(by=By.ID, value="exampleCheck1").click()
 # find element by xPath
 driver.find_element(by=By.XPATH, value="//input[@type='submit']").click()
 
+# dropdown handling
+# can use select class in static dropdown
+# select class provides the method to handle the options in dropdown
+dropdown = Select(driver.find_element(by=By.ID, value="exampleFormControlSelect1"))
+dropdown.select_by_visible_text("Female")
+dropdown.select_by_index(0)
+
 # grabbing the text..
 successText = driver.find_element(by=By.CLASS_NAME, value="alert-success").text
 print(successText)
 
-# sales force login..
-driver.get("https://login.salesforce.com")
+# assertion for checking the test automatically
+# if the test failed or passed
+assert "success" in successText
 
-# generating css from id and class
-# tagName#id eg: input#username or #username (only for id)
-# tagName.className eg: input.password or .password (only for class)
-driver.find_element(by=By.CSS_SELECTOR, value="#username").send_keys("UserName")
-driver.find_element(by=By.CSS_SELECTOR, value=".password").send_keys("Pass")
-# to clear any data from the field
-driver.find_element(by=By.CSS_SELECTOR, value=".password").clear()
+# # sales force login..
 
-# link text the element should start wht <a> tag
-driver.find_element(by=By.LINK_TEXT, value="Forgot Your Password?").click()
-# getting the element with text using xPath
-# driver.find_element(by=By.XPATH, value="//a[text()='Cancel']").click()
+# driver.get("https://login.salesforce.com")
+#
+# # generating css from id and class
+# # tagName#id eg: input#username or #username (only for id)
+# # tagName.className eg: input.password or .password (only for class)
+# driver.find_element(by=By.CSS_SELECTOR, value="#username").send_keys("UserName")
+# driver.find_element(by=By.CSS_SELECTOR, value=".password").send_keys("Pass")
+# # to clear any data from the field
+# driver.find_element(by=By.CSS_SELECTOR, value=".password").clear()
+#
+# # link text the element should start wht <a> tag
+# driver.find_element(by=By.LINK_TEXT, value="Forgot Your Password?").click()
+# driver.find_element(by=By.CLASS_NAME, value="cancel").click()
+# # getting the element with text using xPath
+# # driver.find_element(by=By.XPATH, value="//a[text()='Cancel']").click()
 
+# sales force ends here
 
 
 
